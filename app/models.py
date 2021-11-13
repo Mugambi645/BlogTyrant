@@ -47,3 +47,59 @@ class User(UserMixin,db.Model):
 
     def __repr__(self):
         return f'User{self.username}'
+
+class Articles(db.Model):
+    __tablename__='articles'
+
+    id = db.Column(db.Integer,primary_key=True)
+    title = db.Column(db.String(255))
+    content = db.Column(db.String(2550))
+    date_posted = db.Column(db.DateTime, default = datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    reviews = db.relationship('Reviews', backref = 'author', lazy = True) 
+
+    def save_article(self):
+        db.session.add(self)
+        db.session.commit()
+    
+
+    def __repr__(self):
+        return f'Articles{self.name}'
+
+
+class Reviews(db.Model):
+    __tablename__ = 'reviews'
+
+    id = db.Column(db.Integer,primary_key = True)
+    review = db.Column(db.String(255))
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+    article_id = db.Column(db.Integer,  db.ForeignKey("articles.id"))
+
+    def save_review(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def __repr__(self):
+        return f'Review{self.review}'
+
+
+    @classmethod
+    def get_reviews(cls,id):
+        reviews = Review.query.filter_by(articles_id=id).all()
+        return reviews
+        
+    @classmethod
+    def clear_reviews(cls):
+        Review.all_reviews.clear()
+
+    @classmethod
+    def get_reviews(cls,id):
+
+        response = []
+
+
+        for review in cls.all_reviews:
+            if review.article_id == id:
+                response.append(review)
+
+        return response

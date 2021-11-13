@@ -72,14 +72,37 @@
        <div class="conteiner">
 <div class="card">
   <div class="col-sm-9">
-    <p id="quote"><strong></strong></p> 
-    <p class="font"id="quoteauthor"></p>
+    <p id="quote"><strong>{{quote}}</strong></p> 
+    <p class="font"id="quoteauthor">{{quote_author}}</p>
   </div>
 <div class="text-center" id="button">
-<button class="btn btn-primary"><a href="" >New Blog</a></button>
+<button class="btn btn-primary"><a href="{{url_for('main.post')}}" >New Blog</a></button>
 </div>
 <br>
-</div>
-</div>
-     </body>
+
+
+{% for article in articles  %}
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="panel">
+    <div class="panel-body">
+        <h2 id="articletitle">{{ article.title }}</h2>
+        <p id="content">{{ article.content }}</p>
+        
+        <blockquote >
+          <footer>Posted by:
+            <cite > {{ article.author.username}}</cite>
+            on
+            <cite > {{ article.date_posted.strftime('%Y-%m-%d')}}</cite>
+          </footer>
+        </blockquote>
+        <div class="text-center">
+        <a href="/review/{{article.id}}" class="btn btn-primary">Add Comment</a>
+      </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+</body>
+{% endblock %}
 </html>
