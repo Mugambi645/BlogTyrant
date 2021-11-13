@@ -18,14 +18,14 @@ def index():
     articles = Articles.query.all()
 
     title = "Home of stories"
-    return render_template('index.html',title = title, quote = quote, quote_author = quote_author,articles = articles , author = current_user)
+    return render_template('main/index.html',title = title, quote = quote, quote_author = quote_author,articles = articles , author = current_user)
 
 @main.route('/user/<int:user_id>')
 def user(user_id):
     '''
     view function that returns the users details page and its data
     '''
-    return render_template('articles.html', id = user_id)   
+    return render_template('main/articles.html', id = user_id)   
 
 @main.route("/post",methods=['GET','POST'])
 @login_required
