@@ -1,11 +1,11 @@
-from flask import render_template,request,redirect,url_for,abort
+from flask import render_template,redirect,url_for,abort,request
 from . import main
 from ..requests import get_quote
 from .forms import ReviewForm,UpdateProfile,ArticleForm
 from .. models import Reviews,User,Articles
 from flask import jsonify
 from flask_login import login_required,UserMixin,current_user
-from app import db
+from .. import db,photos
 
 @main.route('/')
 def index():
@@ -47,26 +47,12 @@ def post():
         return redirect(url_for('main.index'))
 
     title="Post your article"
-    return render_template('post.html',title=title,article_form=form)
+    return render_template('main/post.html',title=title,article_form=form)
 
-@main.route("/review/<int:id>",methods=['GET','POST'])
-@login_required
-def review(id):
-    form = ReviewForm()
-    if form.validate_on_submit():
-        review = form.review.data
 
-        new_review = Reviews()
-        new_review.review= review
 
-        new_review.save_review()
 
-        new_review = Reviews(review = review)
 
-        return redirect(url_for('main.index',id = article.id))
-
-    title="Post your review"
-    return render_template('new_review.html',review_form=form)
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -94,8 +80,8 @@ def update_profile(uname):
 
         return redirect(url_for('.profile',uname=user.username))
 
-    return render_template('profile/update.html',form =form)
-
+    return render_template('profile/update_profile.html',form =form)
+#photos logic
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
 def update_pic(uname):

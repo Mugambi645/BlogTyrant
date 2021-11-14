@@ -85,12 +85,12 @@ class Reviews(db.Model):
 
     @classmethod
     def get_reviews(cls,id):
-        reviews = Review.query.filter_by(articles_id=id).all()
+        reviews = Reviews.query.filter_by(articles_id=id).all()
         return reviews
         
     @classmethod
     def clear_reviews(cls):
-        Review.all_reviews.clear()
+        Reviews.all_reviews.clear()
 
     @classmethod
     def get_reviews(cls,id):

@@ -9,7 +9,6 @@ class ReviewForm(FlaskForm):
 class UpdateProfile(FlaskForm):
     bio = TextAreaField('Tell us about you.',validators = [Required()])
     submit = SubmitField('Submit')
-
 class ArticleForm(FlaskForm):
     title = StringField("Article Title", validators = [Required()])
     content = TextAreaField('Write your article here')
