@@ -1,6 +1,6 @@
 from flask import render_template,redirect,url_for,abort,request
 from . import main
-from ..requests import get_quote
+from app.requests import get_quote
 from .forms import ReviewForm,UpdateProfile,ArticleForm
 from .. models import Reviews,User,Articles
 from flask import jsonify

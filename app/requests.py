@@ -1,6 +1,6 @@
 import urllib.request,json
 from .models import User
-import requests
+
 
 #Getting the base url
 base_url = None
