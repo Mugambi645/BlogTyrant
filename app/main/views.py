@@ -125,6 +125,3 @@ def single_review(id):
 
     return render_template('review.html',review = review)
 
-
-
-    

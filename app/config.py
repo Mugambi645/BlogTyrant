@@ -9,14 +9,17 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://pato:flower2@localhost/blog'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
     SESSION_COOKIE_SECURE = False
-    #  email configurations
+     # email configurations
     MAIL_SERVER = 'smtp.googlemail.com'
-    MAIL_PORT = 587
-    MAIL_USE_TLS = True
+    MAIL_PORT = 465
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 
-
+    #simple mde configurations
+    SIMPLEMDE_JS_IIFE = True
+    SIMPLEMDE_USE_CDN = True
 class ProdConfig(Config):
     """
     Production configuration class
