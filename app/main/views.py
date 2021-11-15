@@ -20,6 +20,30 @@ def index():
     title = "Home of stories"
     return render_template('main/index.html',title = title, quote = quote, quote_author = quote_author,articles = articles , author = current_user)
 
+@main.route("/review/<int:id>",methods=['GET','POST'])
+@login_required
+def review(id):
+    
+    form = ReviewForm()
+    article = Articles.query.get_or_404(id)
+    if form.validate_on_submit():
+        review = form.review.data
+
+        new_review = Reviews()
+        new_review.review= review
+
+        new_review.save_review()
+
+        new_review = Reviews(review = review)
+
+        return redirect(url_for('main.index',id = article.id))
+
+    title="Post your review"
+    return render_template('main/new_review.html',review_form=form)
+
+
+
+
 @main.route('/user/<int:user_id>')
 def user(user_id):
     '''
@@ -100,3 +124,7 @@ def single_review(id):
         abort(404)
 
     return render_template('review.html',review = review)
+
+
+
+    
