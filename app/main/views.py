@@ -16,7 +16,6 @@ def index():
     quote = show_quote["quote"]
     quote_author = show_quote["author"]
     articles = Articles.query.all()
-
     title = "Home of stories"
     return render_template('main/index.html',title = title, quote = quote, quote_author = quote_author,articles = articles , author = current_user)
 
@@ -25,7 +24,7 @@ def index():
 def review(id):
     
     form = ReviewForm()
-    article = Articles.query.get_or_404(id)
+    #article = Articles.query.get_or_404(id)
     if form.validate_on_submit():
         review = form.review.data
 
@@ -36,7 +35,7 @@ def review(id):
 
         new_review = Reviews(review = review)
 
-        return redirect(url_for('main.index',id = article.id))
+        return redirect(url_for('main.index',id = id))
 
     title="Post your review"
     return render_template('main/new_review.html',review_form=form)

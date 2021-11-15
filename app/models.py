@@ -50,10 +50,10 @@ class User(UserMixin,db.Model):
 
 class Articles(db.Model):
     __tablename__='articles'
-
+    
     id = db.Column(db.Integer,primary_key=True)
-    title = db.Column(db.String(255))
     content = db.Column(db.String(2550))
+    title = db.Column(db.String(255))
     date_posted = db.Column(db.DateTime, default = datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     reviews = db.relationship('Reviews', backref = 'author', lazy = True) 
@@ -71,7 +71,7 @@ class Reviews(db.Model):
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer,primary_key = True)
-    title = db.column(db.String(255))
+    
     review = db.Column(db.String(255))
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     article_id = db.Column(db.Integer,  db.ForeignKey("articles.id"))

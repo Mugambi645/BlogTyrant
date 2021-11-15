@@ -1,1 +1,1 @@
-SECRET_KEY = "HDY3GSH553"
+ SECRET_KEY='64dnxtqravs'
