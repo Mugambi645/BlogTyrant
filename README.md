@@ -36,7 +36,7 @@ If you find a bug (the website couldn't handle the query and or gave undesired r
 
 If you'd like to request a new function, feel free to do so by opening an issue here. Please include sample queries and their corresponding results.
 # Live version
-- [Live version](/)
+- [Live version](https://blogtyrant.herokuapp.com/)
 
 ### Licence
 You can use this application for personal use only.
