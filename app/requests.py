@@ -1,5 +1,6 @@
 import urllib.request,json
-from .models import User
+from .models import User,Quote
+import requests
 
 
 #Getting the base url
